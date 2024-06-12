@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:45:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/06/12 20:22:03 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:04:03 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <new>
 # include <cstring>
 # include <stdexcept>
-
-# define NULL (void *)0;
 
 template<typename T> class	Array
 {
@@ -35,11 +33,11 @@ template<typename T> class	Array
 		unsigned int	size(void) const;
 		T& operator[](unsigned int pos) const;
 
-		class ExeptionOutOfBand: public std::exception
+		class ExeptionOutOfBound: public std::exception
 		{
 			public:
 				const char *what(void) const throw();
-		}
+		};
 };
 
 template<typename T> Array<T>::Array(void)
@@ -59,15 +57,28 @@ template<typename T> Array<T>::Array(Array<T> const& cpy)
 template<typename T> Array<T>& Array<T>::operator=(Array<T> const& cpy)
 {
 	T				*buffer;
+	unsigned int	i;
 
 	buffer = new (std::nothrow) T[cpy._size];
+	i = 0;
 	if (buffer)
 	{
-		std::memcpy(buffer, cpy._array, sizeof(T) * cpy._size);
-		if (this->_array)
-			delete [] this->_array;
-		this->_array = buffer;
-		this->_size = cpy._size;
+		try
+		{
+			while (i < cpy._size)
+			{
+				buffer[i] = cpy._array[i];
+				i++;
+			}
+			if (this->_array)
+				delete [] this->_array;
+			this->_array = buffer;
+			this->_size = cpy._size;
+		}
+		catch(const std::exception&)
+		{
+			delete [] buffer;
+		}
 	}
 	return (*this);
 }
@@ -92,7 +103,7 @@ template<typename T> Array<T>::~Array(void)
 
 template<typename T> unsigned int Array<T>::size(void) const
 {
-	return (this->size);
+	return (this->_size);
 }
 
 template<typename T> T& Array<T>::operator[](unsigned int pos) const
@@ -100,9 +111,13 @@ template<typename T> T& Array<T>::operator[](unsigned int pos) const
 	if (pos < this->_size)
 		return (this->_array[pos]);
 	else
-		throw this->ExeptionOutOfBand();
+		throw Array<T>::ExeptionOutOfBound();
 }
 
-
+template<typename T>const char *Array<T>::ExeptionOutOfBound::what(void)
+	const throw()
+{
+	return ("Out of bound");
+}
 
 #endif
