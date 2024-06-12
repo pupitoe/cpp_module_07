@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:00:22 by tlassere          #+#    #+#             */
-/*   Updated: 2024/06/12 11:44:53 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:11:46 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(void)
 	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
 	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
 
-	
+
 	float flo = 700120.555f;
 	float corneille = 69.69f;
 	std::cout << "flo = " << flo << ", corneille = " << corneille << std::endl;
