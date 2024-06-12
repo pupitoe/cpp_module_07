@@ -6,13 +6,18 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:45:16 by tlassere          #+#    #+#             */
-/*   Updated: 2024/06/12 13:45:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:26:41 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
 
+#include "iostream"
+
 int	main(void)
 {
-	
+	int * a = new int();
+
+	std::cout << a << std::endl;
+	delete a;
 }
