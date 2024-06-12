@@ -1,39 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 12:13:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/06/12 13:42:25 by tlassere         ###   ########.fr       */
+/*   Created: 2024/06/12 13:45:33 by tlassere          #+#    #+#             */
+/*   Updated: 2024/06/12 14:03:36 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-# define ITER_HPP
+#ifndef ARRAY_HPP
+# define ARRAY_HPP
 
-#include <iostream>
+# include <new>
 
-template<typename T>
-void iter(T *array, unsigned long long const length, void (*f)(T&))
+# define NULL (void *)0;
+
+template<typename T> class	Array
 {
-	unsigned long long	i;
+	private:
+		T	*_array;
+		int _size;
 
-	if (array && f)
-	{
-		i = 0;
-		while (i < length)
-		{
-			(*f)(array[i]);
-			i++;
-		}
-	}
+	public:
+		Array(void);
+		~Array(void);
+};
+
+template<typename T> Array<T>::Array(void)
+{
+	this->_array = NULL;
+	this->_size = 0;
 }
 
-template<typename T> void	print(T& val)
+template<typename T> Array<T>::~Array(void)
 {
-	std::cout << val << std::endl;
+	if (this->_array)
+		delete [] this->_array;
 }
 
 #endif
