@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:45:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/06/12 21:04:03 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:09:49 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ template<typename T> Array<T>& Array<T>::operator=(Array<T> const& cpy)
 	i = 0;
 	if (buffer)
 	{
-		try
+		try //to catch an error if a class throws an exception at copy
 		{
 			while (i < cpy._size)
 			{
