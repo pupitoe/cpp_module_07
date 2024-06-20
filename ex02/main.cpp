@@ -6,12 +6,12 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:45:16 by tlassere          #+#    #+#             */
-/*   Updated: 2024/06/12 21:04:38 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:35:07 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
-#include "iostream"
+#include <iostream>
 #include <string>
 
 int	main(void)

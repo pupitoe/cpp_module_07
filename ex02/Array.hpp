@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:45:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/06/12 21:09:49 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:35:55 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ template<typename T> Array<T>::Array(void)
 
 template<typename T> Array<T>::Array(Array<T> const& cpy)
 {
-	*this = cpy;
 	this->_array = NULL;
 	this->_size = 0;
+	*this = cpy;
 	return ;
 }
 
@@ -59,17 +59,16 @@ template<typename T> Array<T>& Array<T>::operator=(Array<T> const& cpy)
 	T				*buffer;
 	unsigned int	i;
 
-	buffer = new (std::nothrow) T[cpy._size];
-	i = 0;
-	if (buffer)
+	buffer = NULL;
+	if (cpy._size != 0 && cpy._array)
+		buffer = new (std::nothrow) T[cpy._size];
+	i = -1;
+	if (buffer || cpy._size == 0)
 	{
 		try //to catch an error if a class throws an exception at copy
 		{
-			while (i < cpy._size)
-			{
+			while (++i, i < cpy._size && cpy._array)
 				buffer[i] = cpy._array[i];
-				i++;
-			}
 			if (this->_array)
 				delete [] this->_array;
 			this->_array = buffer;
@@ -77,7 +76,8 @@ template<typename T> Array<T>& Array<T>::operator=(Array<T> const& cpy)
 		}
 		catch(const std::exception&)
 		{
-			delete [] buffer;
+			if (buffer)
+				delete [] buffer;
 		}
 	}
 	return (*this);
@@ -108,7 +108,7 @@ template<typename T> unsigned int Array<T>::size(void) const
 
 template<typename T> T& Array<T>::operator[](unsigned int pos) const
 {
-	if (pos < this->_size)
+	if (pos < this->_size && this->_array)
 		return (this->_array[pos]);
 	else
 		throw Array<T>::ExeptionOutOfBound();
