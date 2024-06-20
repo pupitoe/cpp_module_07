@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:45:16 by tlassere          #+#    #+#             */
-/*   Updated: 2024/06/20 17:35:07 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:50:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,19 @@ int	main(void)
 		std::cout << "bijour[1] " << bijour[1] << std::endl;
 		std::cout << "bijour[2] " << bijour[2] << std::endl;
 		std::cout << "bijour size " << bijour.size() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	Array<std::string> bbijour(bijour);
+	try
+	{
+		std::cout << "bbijour[0] " << bbijour[0] << std::endl;
+		std::cout << "bbijour[1] " << bbijour[1] << std::endl;
+		std::cout << "bbijour[2] " << bbijour[2] << std::endl;
+		std::cout << "bbijour size " << bbijour.size() << std::endl;
 	}
 	catch(const std::exception& e)
 	{
