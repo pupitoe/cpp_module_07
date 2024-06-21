@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:45:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/06/20 17:35:55 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:26:22 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,15 @@ template<typename T> Array<T>& Array<T>::operator=(Array<T> const& cpy)
 
 template<typename T> Array<T>::Array(unsigned int const size)
 {
-	this->_array = new (std::nothrow) T[size];
+	this->_array = NULL;
+	this->_size = 0;
+	if (size > 0)
+		this->_array = new (std::nothrow) T[size];
 	if (this->_array)
 	{
 		std::memset(this->_array, 0, sizeof(T) * size);
 		this->_size = size;
 	}
-	else
-		this->_size = 0;
 }
 
 template<typename T> Array<T>::~Array(void)
